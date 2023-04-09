@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+    <div class="navigation">
+        <h1 id="title">Decentralised Voting System</h1>
+    </div> <br><br>
+    <h1> Admin Login</h1> <br><br>
+    <div class="login-container">
+        <form>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        if (document.cookie == "admin") {
+            window.location.href = "admin-panel.html";
+        } else {
+
+
+            const form = document.querySelector('form');
+            const resultDiv = document.querySelector('#result');
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const username = form.username.value;
+                const password = form.password.value;
+
+                const response = await fetch('json/accessList.json');
+                const accessList = await response.json();
+
+                if (accessList[username]) {
+                    if (accessList[username] === password) {
+                        alert('Login successful.')
+                        createCookie('admin', 3)
+                        window.location.href = "admin-panel.html";
+                    } else {
+                        alert('Incorrect password.')
+                    }
+                } else {
+                    alert('Username not found.')
+                }
+            });
+
+            function createCookie(value, minutes) {
+                if (minutes) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (minutes * 60 * 1000));
+                    var expires = "; expires=" + date.toGMTString();
+                } else {
+                    var expires = "";
+                }
+                document.cookie = value + expires + "; path=/";
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>

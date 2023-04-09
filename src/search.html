@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Find Mobile Number</title>
+</head>
+<body>
+  <h1>Find Mobile Number</h1>
+  <form id="search-form">
+    <label for="aadhaar-field">Aadhaar Number:</label>
+    <input type="text" id="aadhaar-field" name="aadhaar"><br>
+
+    <input type="submit" value="Search">
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    const form = document.getElementById('search-form');
+    const aadhaarField = document.getElementById('aadhaar-field');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      // Get the Aadhaar number entered by the user
+      const aadhaarValue = aadhaarField.value;
+
+      // Read the data from the file
+      fetch('registration.json')
+        .then(response => response.json())
+        .then(data => {
+          // Find the object with the matching Aadhaar number
+          const matchingData = data.find(obj => obj.aadhaar === aadhaarValue);
+
+          if (matchingData) {
+            // Display the mobile number for the matching object
+            const number = matchingData.number;
+            resultDiv.innerText = `Mobile number: ${number}`;
+          } else {
+            // Display an error message if no matching object was found
+            resultDiv.innerText = `No data found for Aadhaar number ${aadhaarValue}`;
+          }
+        })
+        .catch(error => {
+          // Display an error message if there was a problem reading the file
+          resultDiv.innerText = 'Error reading data file';
+        });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <title>Decentralised Voting System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="navigation">
+        <h1 id="title">Decentralised Voting System</h1>
+        <div class="nav-items">
+            <a href="index.html">Home</a>
+            <a href="admin.html">Admin Login</a>
+            <a href="voting.html">Voter Panel</a>
+            <a href="results.html">Results</a>
+
+        </div>
+    </div>
+    <div class="container">
+        <h1 style="font-weight:1000;text-align:center;">LOGIN!</h1>
+        <form id="first">
+            <input type="text" id="number" placeholder="Enter Aadhar Number">
+            <div id="recaptcha-container"></div>
+            <button type="button" id="send" onclick="phoneAuth();">SendCode</button>
+        </form><br>
+        <form style="display: none;" id="second">
+            <input type="text" id="verificationCode" placeholder="Enter OTP">
+            <button type="button" id="verify" onclick="codeverify();">Verify code</button>
+
+        </form>
+    </div>
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBmYbErEcT5XDuu_XQqzBGt3KC29OJAR3w",
+            authDomain: "trial-deb83.firebaseapp.com",
+            projectId: "trial-deb83",
+            storageBucket: "trial-deb83.appspot.com",
+            messagingSenderId: "643007881423",
+            appId: "1:643007881423:web:d3e5a1662a07931eda57ba",
+            measurementId: "G-BDEEQLDDYK"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="js/login.js" type="text/javascript"></script>
+</body>
+
+</html>

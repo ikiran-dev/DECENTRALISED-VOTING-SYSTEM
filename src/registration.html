@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+  <div class="navigation">
+    <h1 id="title">Decentralised Voting System</h1>
+    <div class="nav-items">
+      <a href="admin-panel.html">Home</a>
+      <a href="registration.html">Registration Panel</a>
+      <a href="index.html">Voter Panel</a>
+      <a href="results.html">Results</a>
+
+    </div>
+  </div> <br><br>
+  <h1> Register User</h1> <br><br>
+  <div class="login-container">
+    <form id="registration-form">
+      <label for="username">Aadhaar Number:</label>
+      <input type="text" id="username" name="aadhaar">
+
+      <label for="number-field">Mobile Number:</label>
+      <input type="text" id="password" name="number">
+
+      <button type="submit"> Register</button>
+    </form>
+  </div>
+
+  <script>
+    if (document.cookie != "admin") {
+      window.location.href = "admin.html";
+    } else {
+
+      const form = document.getElementById('registration-form');
+      const aadhaarField = document.getElementById('username');
+      const numberField = document.getElementById('password');
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        // Get the values from the form fields
+        const aadhaarValue = aadhaarField.value;
+        const numberValue = numberField.value;
+
+        // Create an object with the values
+        const data = {
+          "aadhaar": aadhaarValue,
+          "number": numberValue
+        };
+
+        // Read the existing data from the file
+        fetch('json/registration.json')
+          .then(response => response.json())
+          .then(existingData => {
+            // Append the new data to the existing data
+            const newData = [...existingData, data];
+
+            // Convert the new data to a JSON string
+            const jsonData = JSON.stringify(newData);
+
+            // Save the new data to the file
+            const file = new Blob([jsonData], { type: 'application/json' });
+            const url = URL.createObjectURL(file);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'registration.json';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+              document.body.removeChild(a);
+              window.URL.revokeObjectURL(url);
+            }, 0);
+          })
+          .catch(error => {
+            // If the file doesn't exist yet, create it with the new data
+            const newData = [data];
+            const jsonData = JSON.stringify(newData);
+            const file = new Blob([jsonData], { type: 'application/json' });
+            const url = URL.createObjectURL(file);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'registration.json';
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+              document.body.removeChild(a);
+              window.URL.revokeObjectURL(url);
+            }, 0);
+          });
+      })
+    };
+  </script>
+</body>
+
+</html>

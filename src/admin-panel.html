@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Admin Panel</title>
+
+
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet" href="css/style.css">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="navigation">
+        <h1 id="title">Decentralised Voting System</h1>
+
+        <div class="nav-items">
+            <a href="admin-panel.html">Home</a>
+            <a href="registration.html">Registration Panel</a>
+            <a href="index.html">Voter Panel</a>
+            <a href="results.html">Results</a>
+
+        </div>
+    </div>
+
+    <div class="container" style="width: 650px;">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 id="results" class="text-center">SIGNED IN AS ADMIN!</h1>
+
+            </div>
+
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <!-- Include all compiled plugins (below), or include individual files as needed -->
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/web3.min.js"></script>
+            <script src="js/truffle-contract.js"></script>
+            <script src=""></script>
+</body>
+<script>
+    if (document.cookie != "admin") {
+        window.location.href = "admin.html";
+    }
+</script>
+
+</html>
