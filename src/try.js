@@ -12,7 +12,8 @@ App = {
   
     initWeb3: function () {
       // TODO: refactor conditional
-      if (document.cookie != 'admin'){
+      x=6;
+      if (x!=6){
         window.location.href = "404.html";
   
       }else {
@@ -107,39 +108,28 @@ App = {
           return electionInstance.candidatesCount();
         })
         .then(async (candidatesCount) => {
+ 
           const promise = [];
           for (var i = 1; i <= candidatesCount; i++) {
             promise.push(electionInstance.candidates(i));
           }
   
           const candidates = await Promise.all(promise);
-          var candidatesResults = $('#candidatesResults');
-          candidatesResults.empty();
-  
-          var candidatesSelect = $('#candidatesSelect');
-          candidatesSelect.empty();
-  
+          var labels=[];
+          var values=[];
+          
           for (var i = 0; i < candidatesCount; i++) {
             var id = candidates[i][0];
             var name = candidates[i][1];
-            var voteCount = candidates[i][2];
-  
-            // Render candidate Result
-            var candidateTemplate =
-              '<tr><th>' +
-              id +
-              '</th><td>' +
-              name +
-              '</td><td>' +
-              voteCount +
-              '</td></tr>';
-            candidatesResults.append(candidateTemplate);
-  
-            // Render candidate ballot option
-            var candidateOption =
-              "<option value='" + id + "' >" + name + '</ option>';
-            candidatesSelect.append(candidateOption);
+            var voteCount = candidates[i][2].c;
+            labels.push(name);
+            values.push(voteCount);
+            
           }
+/*           console.log(candidates[0][2]);
+          var labels=[candidates[0][1],candidates[1][1],candidates[2][1]];
+          var values=[candidates[0][2].c,candidates[1][2].c,candidates[2][2].c];  */      
+          createChart(labels, values);         
           return electionInstance.voters(App.account);
         })
         .then(function (hasVoted) {
@@ -180,4 +170,39 @@ App = {
     });
   });
   
+//create a function to create a pie chart from candidates data in the contract
+function createChart(labels, values) {
+  const chartEl = document.getElementById('chart');
+  const statsEl = document.getElementById('winner');
+  const intValues = values.map((value) => parseInt(value));
+  const totalVotes = intValues.reduce((acc, curr) => acc + curr, 0);
+  const maxIndex = intValues.indexOf(Math.max(...intValues));
+  const minIndex = intValues.indexOf(Math.min(...intValues));
+
+  if (chartEl.chart) {
+    // If there is, destroy it
+    chartEl.chart.destroy();
+  }
   
+  const chart = new Chart(chartEl, {
+    type: 'pie',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Votes',
+        data: intValues,
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#2ECC71']
+      }]
+    }
+  });
+
+  // Display the winning and losing statistics
+  statsEl.innerHTML = `
+    <div>
+      <p>Total Votes: ${totalVotes}</p>
+      <p>Current Leader: ${labels[maxIndex]} with ${intValues[maxIndex]} votes</p>
+      <p>Last Place: ${labels[minIndex]} with ${intValues[minIndex]} votes</p>
+    </div>
+  `;
+}
+

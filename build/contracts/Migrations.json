@@ -53,7 +53,7 @@
   "sourceMap": "71:413:1:-;;;121:10;98:33;;;;;;;;;;;;;;;;;;;;71:413;8:9:-1;5:2;;;30:1;27;20:12;5:2;71:413:1;;;;;;;",
   "deployedSourceMap": "71:413:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;71:413:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;138:39;;;:::i;:::-;;;;;;;;;;;;;;;;;;;98:33;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;367:114;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;367:114:1;;;;;;;;;;;;;;;;;:::i;:::-;;138:39;;;;:::o;98:33::-;;;;;;;;;;;;;:::o;367:114::-;255:5;;;;;;;;;;;241:19;;:10;:19;;;219:120;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;464:9;437:24;:36;;;;367:114;:::o",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity >=0.4.22 <=0.8.12;\r\n\r\ncontract Migrations {\r\n    address public owner = msg.sender;\r\n    uint256 public last_completed_migration;\r\n\r\n    modifier restricted() {\r\n        require(\r\n            msg.sender == owner,\r\n            \"This function is restricted to the contract's owner\"\r\n        );\r\n        _;\r\n    }\r\n\r\n    function setCompleted(uint256 completed) public restricted {\r\n        last_completed_migration = completed;\r\n    }\r\n}\r\n",
-  "sourcePath": "C:\\Users\\ikira\\OneDrive\\Desktop\\KIRAN\\contracts\\Migrations.sol",
+  "sourcePath": "C:\\Users\\ikira\\OneDrive\\Desktop\\DVOTE\\contracts\\Migrations.sol",
   "ast": {
     "absolutePath": "project:/contracts/Migrations.sol",
     "exportedSymbols": {
@@ -915,12 +915,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xe0e982aAFe2830Fd6e57dBdC5ACDbCB88B2112f6",
-      "transactionHash": "0x209c69ad8b64cab5a36be535eff86939fe72bac746c9f47a2e71fa79539d899a"
+      "address": "0xCFBc29C7Fc0A438d8e54e23dcdDD81CAe613293C",
+      "transactionHash": "0x5faec2aaf439004f65b9adf16d6f6f76fdcc1a512d864364617ed47768d97632"
     }
   },
   "schemaVersion": "3.4.13",
-  "updatedAt": "2023-04-09T16:53:10.030Z",
+  "updatedAt": "2023-04-15T17:11:39.856Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

@@ -109,7 +109,7 @@
   "sourceMap": "71:1300:0:-;;;558:137;8:9:-1;5:2;;;30:1;27;20:12;5:2;558:137:0;590:27;;;;;;;;;;;;;;;;;;:12;;;:27;;:::i;:::-;628;;;;;;;;;;;;;;;;;;:12;;;:27;;:::i;:::-;666:21;;;;;;;;;;;;;;;;;;:12;;;:21;;:::i;:::-;71:1300;;703:164;765:15;;:17;;;;;;;;;;;;;823:36;;;;;;;;833:15;;823:36;;;;850:5;823:36;;;;857:1;823:36;;;793:10;:27;804:15;;793:27;;;;;;;;;;;:66;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;703:164;:::o;71:1300::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;",
   "deployedSourceMap": "71:1300:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;71:1300:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;875:493;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;875:493:0;;;;;;;;;;;;;;;;;:::i;:::-;;444:30;;;:::i;:::-;;;;;;;;;;;;;;;;;;;359:47;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;359:47:0;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;359:47:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;265:38;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;265:38:0;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;875:493;989:6;:18;996:10;989:18;;;;;;;;;;;;;;;;;;;;;;;;;988:19;980:28;;;;;;1082:1;1067:12;:16;:51;;;;;1103:15;;1087:12;:31;;1067:51;1059:60;;;;;;1193:4;1172:6;:18;1179:10;1172:18;;;;;;;;;;;;;;;;:25;;;;;;;;;;;;;;;;;;1250:10;:24;1261:12;1250:24;;;;;;;;;;;:34;;;:36;;;;;;;;;;;;;1347:12;1336:24;;;;;;;;;;875:493;:::o;444:30::-;;;;:::o;359:47::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;265:38::-;;;;;;;;;;;;;;;;;;;;;;:::o",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity >=0.4.22 <=0.8.12;\r\n\r\ncontract Election {\r\n    // Model a Candidate\r\n    struct Candidate {\r\n        uint256 id;\r\n        string name;\r\n        uint256 voteCount;\r\n    }\r\n\r\n    // Store accounts that have voted\r\n    mapping(address => bool) public voters;\r\n    // Store Candidates\r\n    // Fetch Candidate\r\n    mapping(uint256 => Candidate) public candidates;\r\n    // Store Candidates Count\r\n    uint256 public candidatesCount;\r\n\r\n    // voted event\r\n    event votedEvent(uint256 indexed _candidateId);\r\n\r\n    constructor() public {\r\n        addCandidate(\"Candidate 1\");\r\n        addCandidate(\"Candidate 2\");\r\n        addCandidate(\"Kiran\");\r\n    }\r\n\r\n    function addCandidate(string memory _name) private {\r\n        candidatesCount++;\r\n        candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);\r\n    }\r\n\r\n    function vote(uint256 _candidateId) public {\r\n        // require that they haven't voted before\r\n        require(!voters[msg.sender]);\r\n\r\n        // require a valid candidate\r\n        require(_candidateId > 0 && _candidateId <= candidatesCount);\r\n\r\n        // record that voter has voted\r\n        voters[msg.sender] = true;\r\n\r\n        // update candidate vote Count\r\n        candidates[_candidateId].voteCount++;\r\n\r\n        // trigger voted event\r\n        emit votedEvent(_candidateId);\r\n    }\r\n}\r\n",
-  "sourcePath": "C:\\Users\\ikira\\OneDrive\\Desktop\\KIRAN\\contracts\\Election.sol",
+  "sourcePath": "C:\\Users\\ikira\\OneDrive\\Desktop\\DVOTE\\contracts\\Election.sol",
   "ast": {
     "absolutePath": "project:/contracts/Election.sol",
     "exportedSymbols": {
@@ -2844,12 +2844,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x6F58C04bcb7e85acfD72817297B4acE131dd8b08",
-      "transactionHash": "0x7c9a2abec8a660711ee95b04695afebbb2471bdd00ff22a8c8df758aa2d4355e"
+      "address": "0x46735271F4e260666110289F77137d33eF57F143",
+      "transactionHash": "0xe832a23559692b7e89dc866647491d534c4b0c84baf688f55919e342c71ce231"
     }
   },
   "schemaVersion": "3.4.13",
-  "updatedAt": "2023-04-09T16:53:10.025Z",
+  "updatedAt": "2023-04-15T17:11:39.847Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
